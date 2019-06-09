@@ -4,6 +4,8 @@ Neste desafio, foi feita uma aplicação ReactJS para consumir uma API de exempl
 
 O desafio de Backend, que consiste em criar a mesma API, também foi feito, ele pode ser visto neste link:
 
+https://github.com/dbins/bossabox_backend
+
 ![Frontend](images/vuutr.png)
 
 ## Instalação
