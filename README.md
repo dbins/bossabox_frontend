@@ -1,68 +1,96 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Desafio Frontend - BossaBox
 
-## Available Scripts
+Neste desafio, foi feita uma aplicação ReactJS para consumir uma API de exemplo feita em Node. 
 
-In the project directory, you can run:
+O desafio de Backend, que consiste em criar a mesma API, também foi feito, ele pode ser visto neste link:
 
-### `npm start`
+![Frontend](images/vuutr.png)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Instalação
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- git clone
+- npm install
+- Iniciar a API digitando npm run api. 
+- Na raiz do projeto, iniciar a aplicação digitando npm start
+  
 
-### `npm test`
+## Scripts incluídos nesta aplicação
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### npm start
 
-### `npm run build`
+Para iniciar a aplicação em modo de desenvolvimento
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### npm run build
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Para gerar a versão em modo de produção, dentro da pasta Build localizada na raiz do projeto é criada a versão para colocar no ar.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### npm run test
 
-### `npm run eject`
+Para testes unitários em modo de desenvolvimento. Para os testes é utilzada a biblioteca Enzyme
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Rotas da API
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+A documentação da API pode ser consultada na página api.html localizada na raiz do projeto. Abaixo segue um resumo das rotas disponíveis:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+| Rota                    | Método | Descrição                 |
+| ----------------------- | ------ | ------------------------- |
+| /tools                  | GET    | Listar tools              |
+| /tools?q=:busca         | GET    | Pesquisa tools pelo title |
+| /tools?tags_like=:busca | GET    | Pesquisa tools por tag    |
+| /tools                  | POST   | Criar uma nova tool       |
+| /tools/:id              | DELETE | Apaga uma tool            |
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Para ativar a API existem duas maneiras, a primeira é digita npm run api na raiz do projeto. A outra forma é acessar a pasta API e digitar o comando npx json-server db.json
 
-## Learn More
+A documentação fornecida pela BossaBox pode ser vista neste link:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+https://gitlab.com/bossabox/challenge-fake-api/tree/master
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Testes
 
-### Code Splitting
+No terminal, a partir da raiz do projeto, digite npm run test para executar os testes da aplicação. Os testes foram feitos utilizado o Enzyme
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Documentação
 
-### Analyzing the Bundle Size
+A documentaçao dos componentes da aplicação se encontra no arquivo styleguide/index.html. Ela pode ser gerada de duas formas, digitando os seguintes comandos no terminal a partir da raiz da aplicação:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- npm run styleguide:build - Para gerar a versão HTML da documentação
+- npm run styleguide - Para subir um servidor com a documentação
 
-### Making a Progressive Web App
+A documentação foi criada utilizada a biblioteca react-styleguidist
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## DOCKER
 
-### Advanced Configuration
+Na raiz do projeto existe um arquivo Dockerfile com a configuração para criar um container para a aplicação e um arquivo docker-compose.yml para subir este container junto com outro container criado para subir a API de exemplo utilizada pela aplicação.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+Os testes foram feitos no Windows 10. O passo a passo para subir o container é o seguinte:
 
-### Deployment
+- Abrir o programa "Kitematic (Alpha)"
+- Dentro dele, na parte inferior esquerda, clicar em "Docker CLI". Será aberta uma janela de terminal do PowerShell.
+- Acessar a pasta onde o projeto foi copiado
+- Verifique qual o IP usado pelo docker usando o comando docker-machine ip default
+- Alterar o arquivo .env na pasta do projeto e inserir o IP do docker, a variável de ambiente REACT_APP_API_URL guarda o IP da API fake.
+- Subir os containers utilizando o comando docker-compose up
+- Para acessar a aplicação, no navegador, digitar http://<IP_DO_DOCKER>:81.
+- A API fake pode ser acessada pelo endereço digitar http://<IP_DO_DOCKER>:3000.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+### Comandos úteis do Docker
 
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+-  docker ps - Para conferir os containers que estão em execução
+-  docker-compose up --build - Para atualizar um container depois de editar o arquivo dockerfile ou docker-compose.yml
+-  docker-machine start default - Para iniciar o serviço do docker, caso a inicialização será manual
+-  docker-compose logs - Exibe os logs dos containers em execução
+-  docker images - Lista as imagens cadastradas na máquina host
+-  docker run <<nome do container>> - Inicia um container
+-  docker stop <<nome do container>> - Encerra a execução de um container
+-  docker stop $(docker ps -a -q)  - Encerra a execução de todos os container
+-  docker rmi $(docker images -f “dangling=true” -q) - Exclui todos os container temporários (que possuem <None> no nome)
+-  docker build - Cria um container a partir de um arquivo Dockerfile localizado na pasta onde o comando foi executado. Para iniciar vários containers ao mesmo tempo, utilize uma arquivo docker-compose.yml
+-  docker volumes ls - Lista os volumes, que são as pastas compartilhadas usadas para persistir dados dos containers.
+-  docker rm <<nome do container>> - Apaga um container
+-  docker rmi <<nome da imagem>> - Apaga um container e a sua imagem
+-  docker kill <<nome do container>> - Derruba o container informado
+-  docker run -i -t <<nome do container>> /bin/bash - Acessa o terminal do container-
+-  docker-compose up - Executar os containers informados no arquivo docker-compose.yml
+-  docker-compose down - Encerra a execução dos containers iniciados pelo arquivo docker-compose.yml
+ 

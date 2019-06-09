@@ -1,0 +1,18 @@
+version: "3.4"
+volumes:
+  data:
+services:
+  api_challenge:
+    build: ./api
+    ports:
+      - "3000:3000"
+    restart: always
+  react_challenge:
+    build: ./
+    links:
+      - api_challenge
+    depends_on:
+      - api_challenge
+    ports:
+      - 81:80
+  
