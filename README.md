@@ -10,10 +10,10 @@ https://github.com/dbins/bossabox_backend
 
 ## Instalação
 
-- git clone
+- git clone https://github.com/dbins/bossabox_frontend
 - npm install
 - Iniciar a API digitando npm run api. 
-- Na raiz do projeto, iniciar a aplicação digitando npm start
+- Iniciar a aplicação digitando npm start
   
 
 ## Scripts incluídos nesta aplicação
