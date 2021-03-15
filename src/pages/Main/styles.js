@@ -77,7 +77,7 @@ export const ButtonAdicionar = styled.button`
   }
 `;
 
-export const Form = styled.form`
+export const Form = styled.div`
   margin-top: 40px;
   width: 100%;
   display: flex;

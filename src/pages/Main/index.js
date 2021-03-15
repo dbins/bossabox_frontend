@@ -74,6 +74,7 @@ export default class Main extends Component {
       if (response.status === 200) {
         const atualizado = repositories.filter(item => item.id !== id);
         this.setState({ modalIsOpen2: false, repositories: atualizado });
+		this.setState({ results: atualizado });
       } else {
         this.setState({ repositoryError: true, modalIsOpen2: false });
         alert("Não foi possivel excluir o registro (" + id + ")");
