@@ -2,6 +2,10 @@
 
 Neste desafio, foi feita uma aplicação ReactJS para consumir uma API de exemplo feita em Node. 
 
+Uma versão mobile deste desafio pode ser vista neste link:
+
+https://github.com/dbins/bossabox_mobile
+
 O desafio de Backend, que consiste em criar a mesma API, também foi feito, ele pode ser visto neste link:
 
 https://github.com/dbins/bossabox_backend
@@ -15,6 +19,9 @@ https://github.com/dbins/bossabox_backend
 - Iniciar a API digitando npm run api. 
 - Iniciar a aplicação digitando npm start
   
+## Vídeo
+
+[![VUTTR](images/frontend_video.png)](http://www.dbins.com.br/videos/bossabox-frontend.mp4) 
 
 ## Scripts incluídos nesta aplicação
 
